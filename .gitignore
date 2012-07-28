@@ -1,0 +1,10 @@
+/pom.xml
+*.profile
+*.pdf
+*jar
+/lib
+/classes
+/native
+/.lein-failures
+/checkouts
+/.lein-deps-sum
