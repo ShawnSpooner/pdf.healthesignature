@@ -1,4 +1,6 @@
 /pom.xml
+*.swp
+*.swn
 *.profile
 *.pdf
 *jar

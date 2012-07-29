@@ -10,7 +10,7 @@
 (defmulti extract :type)
 
 (defmethod extract :default [field] 
-  [(:name field) (:value field)])
+  [(:title field) (:value field)])
 
 (defmethod extract "group" [field] 
   (lazy-cat [:table {:header [(:title field)]}] 
@@ -20,7 +20,8 @@
    [:paragraph (:value field)])
 
 (defmethod extract "signature" [field]
-  [:image {:align :center :base64? true} (.substring (:value field) 22)])
+  [:table {:border false :cell-border false}
+    [(:title field) [:image {:align :center :base64? true} (.substring (:value field) 22)]]])
 
 ;TODO it is possible that one of the grouped types will be alone and we need to account for that
 (defmethod extract nil [field]
@@ -43,7 +44,7 @@
 
 (defn expand [fields part-by]
   (let [partitioned (part-by fields)]
-    (map extract partitioned)))
+    (interpose [:spacer] (map extract partitioned))))
 
 (defn logo []
   [:image {:align :left
@@ -54,18 +55,18 @@
 (def fields (:fields form))
 
 (defn build []
-  (let [fields (:fields form)
+  (let [{fields :fields name :name description :description user-id :userId} form
         pdf-body (cons 
-             {:title  "cfm-admission"
+             {:title  name
              :size          :a4
              :orientation   :potrait
-             :subject "Some subject"
-             :author "John Doe"
-             :creator "Jane Doe"
+             :subject description
+             :author user-id
+             :creator "healthesignature"
              :font {:size 11 :family :helvetica}
              :doc-header ["inspired by" "William Shakespeare"]
              :header "CFM Admission"
-             :footer "healthESignature"
+             :footer "HealthESignature"
              }
              (cons (logo)
                (expand fields break-on)))]
