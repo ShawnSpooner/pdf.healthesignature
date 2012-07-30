@@ -1,4 +1,16 @@
-(ns pdf.healthesignature.run)
+(ns pdf.healthesignature.run
+  (:require [pdf.healthesignature.core :as pdf])
+  (:import [java.io FileInputStream]
+           [java.security KeyStore]))
+
+(defn get-cert [path password]
+  (let [alias "sigmed"
+        pass (.toCharArray password)]
+    (with-open [fis (FileInputStream. path)]
+      (let [store (doto (KeyStore/getInstance "JCEKS")
+                (.load fis pass))]
+            [(.getKey store alias pass)
+             (.getCertificateChain store alias)]))))
 
 (def form  {
     :name "New Patient Screening V2",
@@ -38,3 +50,11 @@
   ],
    :id "NWP2"}
   )
+
+(defn sample []
+  (let [[pk cert] (get-cert "./sigmed.jceks" "test")
+        output (pdf/build form)]
+    (with-open [fios (new java.io.FileOutputStream "./run.pdf")]
+      (println (.size output))
+      (.writeTo (pdf/sign (.toByteArray output) pk cert)
+ fios))))

@@ -1,7 +1,10 @@
 (ns pdf.healthesignature.core
   (:use 
-    [pdf.healthesignature.run]
-    [clj-pdf.core]))
+    [clj-pdf.core])
+  (:import 
+    [com.lowagie.text Rectangle]
+    [com.lowagie.text.pdf PdfSignatureAppearance PdfReader PdfStamper]
+    [java.io ByteArrayOutputStream]))
 
 (defn table [rows]
   (lazy-cat [:table {:border-width 0 :header [] :color [220 255 255]}] 
@@ -52,10 +55,20 @@
            :yscale 0.3} 
     "SigLogo.png"])
 
-(def fields (:fields form))
+;for now just add a field to the end of the document and sign
+(defn sign [bytes key chain]
+ (let [output (new ByteArrayOutputStream)]
+   (with-open [stamper (PdfStamper/createSignature (new PdfReader bytes) output \0)]
+     (doto (.getSignatureAppearance stamper)
+       (.setCrypto key, chain, nil, PdfSignatureAppearance/SELF_SIGNED)
+       (.setReason "HIPAA Compliance.")
+       (.setLocation "SigMed")
+       (.setCertificationLevel PdfSignatureAppearance/CERTIFIED_NO_CHANGES_ALLOWED)))
+     output))
 
-(defn build []
+(defn build [form]
   (let [{fields :fields name :name description :description user-id :userId} form
+        out (new ByteArrayOutputStream)
         pdf-body (cons 
              {:title  name
              :size          :a4
@@ -64,13 +77,10 @@
              :author user-id
              :creator "healthesignature"
              :font {:size 11 :family :helvetica}
-             :doc-header ["inspired by" "William Shakespeare"]
-             :header "CFM Admission"
+             :header name
              :footer "HealthESignature"
              }
              (cons (logo)
                (expand fields break-on)))]
-  (println (count pdf-body))
-  (pdf 
-    pdf-body
-    "test.pdf")))
+    (pdf pdf-body out)
+    out))
