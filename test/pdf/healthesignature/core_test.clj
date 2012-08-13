@@ -25,8 +25,12 @@
     ["Currently being seen for a Workers Compensations Injury?" "no"] 
     ["Family Members current patients at Center Form Family Medicene" ""] 
     ["Have you ever been deisharged from any Eastern Main Medical Physician Office?" "no"] 
-    ["If yes, reason why" "yes"]
     ]
+    [:spacer]
+    [:paragraph "I am setting off the next piece of information"]
+    [:spacer]
+    [:table {:border-width 0, :header [], :color [220 255 255]} 
+      ["If yes, reason why" "yes"]]
     [:spacer]
     [:paragraph "I realize that a failure to disclosure accurate information or purposefully omitting information may result in denial of admission or discharge from the Center for Family Medicine once established. CFM is a Family Medicine Residency program; our goal is for the physicians in the Family Medicine Residency to complete our program and be skilled to continue providing excellent care for a wide range of patients within their own practice. We must have a diverse patient population in order to provide our physicians with the best experience. We must limit certain patient populations in order to accomplish these goals."] 
   [:spacer]
@@ -38,9 +42,9 @@
 
 (fact "break-on split when ever it hits a signature"
   (let [parted (pdf/break-on fields)]
-    (count parted) => 3))
+    (count parted) => 5))
 
 (fact "break-on splits the vector correctly"
   (let [parted (pdf/break-on fields)]
-    (count (first parted)) => 18
-    (count (nth parted 1)) => 1))
+    (count (first parted)) => 17
+    (count (nth parted 1)) => 3))

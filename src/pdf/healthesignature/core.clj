@@ -10,6 +10,9 @@
   (lazy-cat [:table {:border-width 0 :header [] :color [220 255 255]}] 
    rows))
 
+(defn pair [field] 
+  [(:title field) (:value field)])
+
 (defmulti extract :type)
 
 (defmethod extract :default [field] 
@@ -22,22 +25,34 @@
 (defmethod extract "text" [field]
    [:paragraph (:value field)])
 
+(defmethod extract "textField" [field]
+  (table [(pair field)]))
+
 (defmethod extract "signature" [field]
   [:table {:border false :cell-border false}
     [(:title field) [:image {:align :center :base64? true} (.substring (:value field) 22)]]])
 
-;TODO it is possible that one of the grouped types will be alone and we need to account for that
 (defmethod extract nil [field]
   (if (> (count field) 1) 
-    (table (map extract field))
+    (table (map pair field))
     (extract (first field))))
 
-(defn partition-when [pred coll]
-  (lazy-seq
-    (when-let [[x & xs] (seq coll)]
-      (let [[xs ys] (split-with (complement pred) xs)]
-        (cons (cons x xs) (partition-when pred ys))))))
+;TODO this really needs to be cleaned up
+(defn b [pred x xs]
+  (if (pred x)
+    [x xs]
+    (let [[matched non] (split-with (complement pred) xs)]
+      [(cons x matched) non])))
 
+(defn partition-when [pred coll]
+  (let [step (fn [p c]
+    (when-let [[x & xs] (seq c)]
+      (let [[h tail] (b pred x xs)]
+        (if (seq h)
+          (cons h (partition-when pred tail))
+          (recur pred tail)))))]
+    (lazy-seq (step pred coll))))
+;TODO
 
 (defn break-on [fields]
   (partition-when #(or 
