@@ -1,3 +1,4 @@
+*.json
 /pom.xml
 *.swp
 *.swo

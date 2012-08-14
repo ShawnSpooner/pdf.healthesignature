@@ -1,5 +1,6 @@
 (ns pdf.healthesignature.run
   (:require [pdf.healthesignature.core :as pdf])
+  (:use [clojure.data.json :only (read-json json-str)])
   (:import [java.io FileInputStream]
            [java.security KeyStore]))
 
@@ -41,14 +42,24 @@
       {:type "signature" :title "Patient Signature First" :name "sig2" :value expected-sig}
       {:type "text", :value "I realize that a failure to disclosure accurate information or purposefully omitting information may result in denial of admission or discharge from the Center for Family Medicine once established. CFM is a Family Medicine Residency program; our goal is for the physicians in the Family Medicine Residency to complete our program and be skilled to continue providing excellent care for a wide range of patients within their own practice. We must have a diverse patient population in order to provide our physicians with the best experience. We must limit certain patient populations in order to accomplish these goals."}
       {:type "signature" :title "Patient Signature" :name "sig1" :value expected-sig}
+      {:type "group" :name "PAINLOC2" :title "Indicate the areas where you feel pain in your lower body (if applicable):" :elements [
+          {:name "Mid back (thoracic spine)" :title "Mid back (thoracic spine)" :type "checkBox" :value "false"}
+          {:name "Low back" :title "Low Back" :type "checkBox" :value "false"}]}
   ],
    :id "NWP2"}
   )
 
-(defn sample []
-  (let [[pk cert] (get-cert "./sigmed.jceks" "test")
-        output (pdf/build form)]
+(defn write-pdf [content]
+  (let [[pk cert] (get-cert "./sigmed.jceks" "test")]
     (with-open [fios (new java.io.FileOutputStream "./run.pdf")]
-      (println (.size output))
-      (.writeTo (pdf/sign (.toByteArray output) pk cert)
+      (println (.size content))
+      (.writeTo (pdf/sign (.toByteArray content) pk cert)
  fios))))
+
+(defn sample []
+  (let [output (pdf/build form)]
+    (write-pdf output)))
+
+(defn read-from [file]
+  (let [json (read-json (slurp file))]
+    (write-pdf (pdf/build json))))

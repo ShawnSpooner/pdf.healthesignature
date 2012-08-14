@@ -28,6 +28,9 @@
 (defmethod extract "textField" [field]
   (table [(pair field)]))
 
+(defmethod extract "dropDown" [field]
+  (table [(pair field)]))
+
 (defmethod extract "signature" [field]
   [:table {:border false :cell-border false}
     [(:title field) [:image {:align :center :base64? true} (.substring (:value field) 22)]]])
@@ -57,6 +60,7 @@
 (defn break-on [fields]
   (partition-when #(or 
                    (=(:type %) "text")
+                   (=(:type %) "group")
                    (=(:type %) "signature"))
                 fields))
 
