@@ -37,18 +37,18 @@
       {:type "textField", :value "", :name "phone", :title "Phone number to reach you"}
       {:type "textField", :value "", :name "doc", :title "Name of current or most recent Doctor"}
       {:type "textArea", :value "", :name "meds", :title "List of Current Medications and Prescriber"}
-      {:type "toggle", :value "yes", :name "slider1", :title "Are you and EMMC employee or spouse of an employee", :options [{:display "no", :value "no"} {:display "yes", :value "yes"}]}
+      {:type "toggle", :value "yes", :name "slider1", :title "Are you and FAKE employee or spouse of an employee", :options [{:display "no", :value "no"} {:display "yes", :value "yes"}]}
       {:type "toggle", :value "yes", :name "slider2", :title "Have you been hospilalized within the past year?", :options [{:display "no", :value "no"} {:display "yes", :value "yes"}]}
       {:type "textField", :value "", :name "hosp", :title "If yes, name of Hospitol"}
       {:type "toggle", :value "no", :name "slider3", :title "Currently being seen for a Workers Compensations Injury?",
          :options [{:display "no", :value "no"} {:display "yes", :value "yes"}]}
-      {:type "textArea", :value "", :name "fam", :title "Family Members current patients at Center Form Family Medicene"}
-      {:type "toggle", :value "no", :name "slider4", :title "Have you ever been deisharged from any Eastern Main Medical Physician Office?", 
+      {:type "textArea", :value "", :name "fam", :title "Fake Members current patients at Center For Fake Medicene"}
+      {:type "toggle", :value "no", :name "slider4", :title "Have you ever been discharged from any Old Western Medical Physician Office?", 
         :options [{:display "no", :value "no"} {:display "yes", :value "yes"}]}
       {:type "text" :value "I am setting off the next piece of information" :title ""}
       {:type "textField", :value "yes", :name "yes", :title "If yes, reason why"}
       {:type "signature" :title "Patient Signature First" :name "sig2" :value expected-sig}
-      {:type "text", :value "I realize that a failure to disclosure accurate information or purposefully omitting information may result in denial of admission or discharge from the Center for Family Medicine once established. CFM is a Family Medicine Residency program; our goal is for the physicians in the Family Medicine Residency to complete our program and be skilled to continue providing excellent care for a wide range of patients within their own practice. We must have a diverse patient population in order to provide our physicians with the best experience. We must limit certain patient populations in order to accomplish these goals."}
+      {:type "text", :value "I realize that a failure to disclose accurate information or purposefully omitting information may result in denial of admission or discharge from the Center for Fake Medicine once established. CFM is a Fake Medicine Residency program; our goal is for the physicians in the Fake Medicine Residency to complete our program and be skilled to continue providing excellent care for a wide range of patients within their own practice. We must have a diverse patient population in order to provide our physicians with the best experience. We must limit certain patient populations in order to accomplish these goals."}
       {:type "signature" :title "Patient Signature" :name "sig1" :value expected-sig}
   ],
    :id "NWP2"}
