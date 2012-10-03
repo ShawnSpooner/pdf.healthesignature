@@ -1,3 +1,11 @@
+;   Copyright (c) Shawn Spooner. All rights reserved.
+;   The use and distribution terms for this software are covered by the
+;   Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
+;   which can be found in the file epl-v10.html at the root of this distribution.
+;   By using this software in any fashion, you are agreeing to be bound by
+;   the terms of this license.
+;   You must not remove this notice, or any other, from this software.
+
 (ns pdf.healthesignature.run
   (:require [pdf.healthesignature.core :as pdf])
   (:use [clojure.data.json :only (read-json json-str)])
@@ -42,9 +50,6 @@
       {:type "signature" :title "Patient Signature First" :name "sig2" :value expected-sig}
       {:type "text", :value "I realize that a failure to disclosure accurate information or purposefully omitting information may result in denial of admission or discharge from the Center for Family Medicine once established. CFM is a Family Medicine Residency program; our goal is for the physicians in the Family Medicine Residency to complete our program and be skilled to continue providing excellent care for a wide range of patients within their own practice. We must have a diverse patient population in order to provide our physicians with the best experience. We must limit certain patient populations in order to accomplish these goals."}
       {:type "signature" :title "Patient Signature" :name "sig1" :value expected-sig}
-      {:type "group" :name "PAINLOC2" :title "Indicate the areas where you feel pain in your lower body (if applicable):" :elements [
-          {:name "Mid back (thoracic spine)" :title "Mid back (thoracic spine)" :type "checkBox" :value "false"}
-          {:name "Low back" :title "Low Back" :type "checkBox" :value "false"}]}
   ],
    :id "NWP2"}
   )

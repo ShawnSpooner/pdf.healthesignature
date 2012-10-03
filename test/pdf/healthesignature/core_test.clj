@@ -31,8 +31,12 @@
     [:spacer]
     [:table {:border-width 0, :header [], :color [220 255 255]} 
       ["If yes, reason why" "yes"]]
-    [:spacer]
+      [:spacer]
+  [:table {:border false :cell-border false}
+   ["Patient Signature First" [:image {:align :center :base64? true} signature]]]
+  [:spacer]
     [:paragraph "I realize that a failure to disclosure accurate information or purposefully omitting information may result in denial of admission or discharge from the Center for Family Medicine once established. CFM is a Family Medicine Residency program; our goal is for the physicians in the Family Medicine Residency to complete our program and be skilled to continue providing excellent care for a wide range of patients within their own practice. We must have a diverse patient population in order to provide our physicians with the best experience. We must limit certain patient populations in order to accomplish these goals."] 
+
   [:spacer]
   [:table {:border false :cell-border false}
    ["Patient Signature" [:image {:align :center :base64? true} signature]]]])
@@ -42,7 +46,7 @@
 
 (fact "break-on split when ever it hits a signature"
   (let [parted (pdf/break-on fields)]
-    (count parted) => 5))
+    (count parted) => 6))
 
 (fact "break-on splits the vector correctly"
   (let [parted (pdf/break-on fields)]
