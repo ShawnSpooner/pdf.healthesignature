@@ -68,3 +68,5 @@
 (defn read-from [file]
   (let [json (read-json (slurp file))]
     (write-pdf (pdf/build json))))
+
+(defn -main[] (sample))

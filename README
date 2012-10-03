@@ -1,13 +1,13 @@
 # pdf.healthesignature
 
-FIXME: write description
+Libarary used to convert JSON formatted forms into PDFs and sign them
 
 ## Usage
 
-FIXME: write
+To generate a sample run: lein run
 
 ## License
 
-Copyright (C) 2012 FIXME
+Copyright (C) 2012 Shawn Spooner
 
 Distributed under the Eclipse Public License, the same as Clojure.
