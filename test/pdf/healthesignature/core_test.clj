@@ -2,12 +2,12 @@
   (:require [pdf.healthesignature.core :as pdf])
   (:use [midje.sweet]
         [pdf.healthesignature.helpers]
-        [pdf.healthesignature.run]))
+        [pdf.healthesignature.run])
 
 (def fields (:fields form))
 
 (def expected-body
- [[:table {:border-width 0, :header [], :color [220 255 255]} 
+ [[:table {:border-width 0, :header [], :color [163 198 218]} 
     ["Date" "2012-07-26"] 
     ["Name" "Plankmank"] 
     ["Date of Birth" "2012-07-26"] 
@@ -29,7 +29,7 @@
     [:spacer]
     [:paragraph "I am setting off the next piece of information"]
     [:spacer]
-    [:table {:border-width 0, :header [], :color [220 255 255]} 
+    [:table {:border-width 0, :header [], :color [163 198 218]} 
       ["If yes, reason why" "yes"]]
       [:spacer]
   [:table {:border false :cell-border false}

@@ -15,7 +15,7 @@
     [java.io ByteArrayOutputStream]))
 
 (defn table [rows]
-  (lazy-cat [:table {:border-width 0 :header [] :color [220 255 255]}] 
+  (lazy-cat [:table {:border-width 0 :header [] :color [163 198 218]}] 
    rows))
 
 (defn pair [field] 
