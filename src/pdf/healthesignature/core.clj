@@ -33,9 +33,19 @@
 (defmethod extract "text" [field]
    [:paragraph (:value field)])
 
-(defmethod extract "signature" [field]
+(defn build-image [field]
+  [:image {:align :center :base64? true :width (:width field) :height (:height field)} 
+   (.substring (:value field) 22)])
+
+(defn titled-image [field]
   [:table {:border false :cell-border false}
     [(:title field) [:image {:align :center :base64? true} (.substring (:value field) 22)]]])
+
+(defmethod extract "signature" [field]
+  (titled-image field))
+
+(defmethod extract "freeDraw" [field]
+  (build-image field))
 
 (defmethod extract nil [field]
   (if (> (count field) 1) 
@@ -63,6 +73,7 @@
   (partition-when #(or 
                    (=(:type %) "text")
                    (=(:type %) "group")
+                   (=(:type %) "freeDraw")
                    (=(:type %) "signature"))
                 fields))
 
