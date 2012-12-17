@@ -34,7 +34,7 @@
    [:paragraph (:value field)])
 
 (defn build-image [field]
-  [:image {:align :center :base64? true :width (:width field) :height (:height field)} 
+  [:image {:align :center :base64? true} 
    (.substring (:value field) 22)])
 
 (defn titled-image [field]
