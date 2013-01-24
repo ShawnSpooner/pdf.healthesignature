@@ -49,7 +49,7 @@
 
 (defmethod extract "multiSelect" [field]
  [:paragraph
-   [:chunk {:style :bold} (:name field)]
+   [:chunk {:style :bold} (:title field)]
    (lazy-cat [:list {:roman false}] 
      (:value field))])
 
