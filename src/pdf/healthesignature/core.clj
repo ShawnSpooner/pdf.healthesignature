@@ -47,6 +47,12 @@
 (defmethod extract "freeDraw" [field]
   (build-image field))
 
+(defmethod extract "multiSelect" [field]
+ [:paragraph
+   [:chunk {:style :bold} (:name field)]
+   (lazy-cat [:list {:roman false}] 
+     (:value field))])
+
 (defmethod extract nil [field]
   (if (> (count field) 1) 
     (table (map pair field))
@@ -72,6 +78,7 @@
 (defn break-on [fields]
   (partition-when #(or 
                    (=(:type %) "text")
+                   (=(:type %) "multiSelect")
                    (=(:type %) "group")
                    (=(:type %) "freeDraw")
                    (=(:type %) "signature"))
