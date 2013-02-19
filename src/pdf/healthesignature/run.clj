@@ -48,7 +48,7 @@
       {:type "text" :value "I am setting off the next piece of information" :title ""}
       {:type "textField", :value "yes", :name "yes", :title "If yes, reason why"}
       {:type "signature" :title "Patient Signature First" :name "sig2" :value expected-sig}
-      {:type "text", :value "I realize that a failure to disclose accurate information or purposefully omitting information may result in denial of admission or discharge from the Center for Fake Medicine once established. CFM is a Fake Medicine Residency program; our goal is for the physicians in the Fake Medicine Residency to complete our program and be skilled to continue providing excellent care for a wide range of patients within their own practice. We must have a diverse patient population in order to provide our physicians with the best experience. We must limit certain patient populations in order to accomplish these goals."}
+      {:type "text", :value "I <b>realize</b> that a failure to <em>disclose</em> accurate information or purposefully omitting information may result in denial of admission or discharge from the Center for Fake Medicine once established. CFM is a Fake Medicine Residency program; our goal is for the physicians in the Fake Medicine Residency to complete our program and be skilled to continue providing excellent care for a wide range of patients within their own practice. We must have a diverse patient population in order to provide our physicians with the best experience. We must limit certain patient populations in order to accomplish these goals."}
       {:type "signature" :title "Patient Signature" :name "sig1" :value expected-sig}
   ],
    :id "NWP2"}

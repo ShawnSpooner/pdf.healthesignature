@@ -1,5 +1,6 @@
 *.json
 /pom.xml
+*.un~
 *.swp
 *.swo
 *.swn

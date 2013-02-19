@@ -9,6 +9,7 @@
 (ns pdf.healthesignature.core
   (:use 
     [clj-pdf.core])
+  (:require [clojure.string :as str])
   (:import 
     [com.lowagie.text Rectangle]
     [com.lowagie.text.pdf PdfSignatureAppearance PdfReader PdfStamper]
@@ -21,6 +22,9 @@
 (defn pair [field] 
   [(:title field) (:value field)])
 
+(defn drop-html [value]
+  (str/replace value #"<(.|\n)+?>" ""))
+
 (defmulti extract :type)
 
 (defmethod extract :default [field] 
@@ -31,7 +35,8 @@
     (map pair (:elements field))))
 
 (defmethod extract "text" [field]
-   [:paragraph (:value field)])
+  (let [clean-value (drop-html field)]
+   [:paragraph (:value clean-value)]))
 
 (defn build-image [field]
   [:image {:align :center :base64? true} 
