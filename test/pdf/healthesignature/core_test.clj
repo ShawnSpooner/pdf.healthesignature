@@ -57,3 +57,9 @@
   (let [form (pdf/expand fields pdf/break-on)
         table (nth form 0)]
     (count table) => 19))
+
+(fact "text containing HTML, the tags are stripped out"
+  (pdf/extract {:type "text" :value "<strong>Bold</strong> Enough?"}) => "Bold Enough?")
+
+(fact "text without HTML is left as is"
+  (pdf/extract {:type "text" :value "Regular Enough?"}) => "Regular Enough?")

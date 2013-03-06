@@ -35,8 +35,8 @@
     (map pair (:elements field))))
 
 (defmethod extract "text" [field]
-  (let [clean-value (drop-html field)]
-   [:paragraph (:value clean-value)]))
+  (let [clean-value (drop-html (:value field))]
+   [:paragraph clean-value]))
 
 (defn build-image [field]
   [:image {:align :center :base64? true} 
