@@ -2,7 +2,7 @@
   (:require [pdf.healthesignature.core :as pdf])
   (:use [midje.sweet]
         [pdf.healthesignature.helpers]
-        [pdf.healthesignature.run])
+        [pdf.healthesignature.run]))
 
 (def fields (:fields form))
 
@@ -59,7 +59,7 @@
     (count table) => 19))
 
 (fact "text containing HTML, the tags are stripped out"
-  (pdf/extract {:type "text" :value "<strong>Bold</strong> Enough?"}) => "Bold Enough?")
+  (pdf/extract {:type "text" :value "<strong>Bold</strong> Enough?"}) => [:paragraph "Bold Enough?"])
 
 (fact "text without HTML is left as is"
-  (pdf/extract {:type "text" :value "Regular Enough?"}) => "Regular Enough?")
+  (pdf/extract {:type "text" :value "Regular Enough?"}) => [:paragraph "Regular Enough?"])
